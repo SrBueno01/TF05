@@ -1,0 +1,42 @@
+import fs from 'fs/promises';
+import path from 'path';
+import chalk from 'chalk';
+ 
+const STORAGE_DIR = './storage';
+const FILE_PATH = path.join(STORAGE_DIR, 'aula05.txt');
+const CONTENT =
+  'Aula 05 - Manipulação de arquivos com Node.js.\n' +
+  'Arquivo criado com sucesso durante a atividade final.';
+ 
+async function run() {
+  console.log(chalk.bold.blue('\n🚀 Iniciando a aplicação...\n'));
+ 
+  // 1. Criar a pasta storage se não existir
+  try {
+    await fs.access(STORAGE_DIR);
+    console.log(chalk.yellow('📁 Pasta "storage" já existe. Pulando criação.'));
+  } catch {
+    await fs.mkdir(STORAGE_DIR, { recursive: true });
+    console.log(chalk.green('✅ Pasta "storage" criada com sucesso!'));
+  }
+ 
+  // 2. Criar e salvar o arquivo
+  console.log(chalk.cyan('\n📝 Gravando arquivo aula05.txt...'));
+  await fs.writeFile(FILE_PATH, CONTENT, 'utf8');
+  console.log(chalk.green(`✅ Arquivo salvo em: ${chalk.bold(FILE_PATH)}`));
+ 
+  // 3. Ler e exibir o conteúdo salvo
+  console.log(chalk.cyan('\n📖 Lendo o conteúdo do arquivo...\n'));
+  const data = await fs.readFile(FILE_PATH, 'utf8');
+ 
+  console.log(chalk.bgWhite.black('─'.repeat(50)));
+  console.log(chalk.white(data));
+  console.log(chalk.bgWhite.black('─'.repeat(50)));
+ 
+  console.log(chalk.bold.green('\n🎉 Atividade finalizada com sucesso!\n'));
+}
+ 
+run().catch((err) => {
+  console.error(chalk.bold.red('\n❌ Erro durante a execução:'), err.message);
+  process.exit(1);
+});

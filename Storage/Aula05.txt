@@ -1,0 +1,7 @@
+Aula 05 - Manipulação de arquivos com Node.js.
+
+Arquivo criado com sucesso durante a atividade final.
+
+Além disso, durante a execução, o programa deve mostrar mensagens no terminal usando a biblioteca chalk, indicando o andamento da atividade e a finalização com sucesso. Após criar o arquivo, o sistema também deve ler o conteúdo salvo e exibi-lo no terminal.
+
+Pode ser feito via callback ou async await.
